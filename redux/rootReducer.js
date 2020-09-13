@@ -1,7 +1,10 @@
 import {combineReducers} from "redux";
-// import {authReducer} from "./authReducer";
+import {EmployeesReducer} from "./employeesReducer";
+
+
 
 
 export const rootReducer = combineReducers({
     // auth:authReducer
+    employee:EmployeesReducer
 })

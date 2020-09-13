@@ -7,10 +7,10 @@ module.exports = withCSS()
 
 module.exports = {
     env:{
-        GET_ALL:process.env.API_GET,
-        GET_BY_ID:process.env.API_GET_BY_ID,
-        CREATE:process.env.API_CREATE,
-        UPDATE:process.env.API_UPDATE,
-        DELETE:process.env.API_DELETE
+        API_GET:process.env.API_GET,
+        API_GET_BY_ID:process.env.API_GET_BY_ID,
+        API_CREATE:process.env.API_CREATE,
+        API_UPDATE:process.env.API_UPDATE,
+        API_DELETE:process.env.API_DELETE
     }
 }

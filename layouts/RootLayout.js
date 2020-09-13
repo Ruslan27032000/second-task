@@ -9,7 +9,9 @@ export function RootLayout({children}) {
                 <Link href="/employee"><a>Show All List</a></Link>
             </nav>
             <main>
-                {children}
+                <div className="container">
+                    {children}
+                </div>
             </main>
         </>
     )
