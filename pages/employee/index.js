@@ -12,22 +12,24 @@ export default function Employee() {
     const dispatch = useDispatch()
     const data = useSelector(state => state.employee.employees)
     useEffect(() => {
-        dispatch(getEmployees());
+        if(data.length==0){
+            dispatch(getEmployees());
+        }
     }, [])
 
 
     return (
         <RootLayout>
             <div className="row mt-5">
-                <button type="button" className="btn btn-success">Добавить</button>
+                <button type="button" className="btn btn-success" onClick={()=>Router.push('/employee/create')}>Добавить</button>
                 <div className="col-sm-12">
                     <table className="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Age</th>
                             <th scope="col">Salary</th>
+                            <th scope="col">Age</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,7 +43,7 @@ export default function Employee() {
                                         </a>
                                     </Link>
                                     <td>{employee.employee_salary}</td>
-                                    <td>{employee.employee_salary}</td>
+                                    <td>{employee.employee_age}</td>
                                     <button className="btn btn-danger"
                                             onClick={() => dispatch(deleteEmployee(employee.id))}>
                                         Удалить
