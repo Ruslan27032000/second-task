@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import Router from "next/router";
 
 const GET_USER='GET_USER'
 const EDIT_USER = 'EDIT_USER'
@@ -46,5 +47,31 @@ export function getUsers(id){
                 })
         }
         )
+    }
+}
+
+export function editUser(id,name,salary,age){
+    return dispatch=>{
+        axios({
+            method:'put',
+            headers:{ 'Content-Type': 'application/x-www-form-urlencoded' },
+            url:`${process.env.API_UPDATE}/${id}`,
+            data:{
+                name: name,
+                salary: salary,
+                age: age
+            }
+        }).then(response =>{
+            /*Не знаю, стоит ли менять старый айдишник на новый*/
+           if(response.data.status == "success"){
+               dispatch({
+                   type:EDIT_USER,
+                   name,
+                   salary,
+                   age
+               })
+               Router.push(`/employee/${id}`);
+           }
+        })
     }
 }
