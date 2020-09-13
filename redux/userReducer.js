@@ -3,6 +3,7 @@ import Router from "next/router";
 
 const GET_USER='GET_USER'
 const EDIT_USER = 'EDIT_USER'
+const RESET_USER = 'RESET_USER'
 
 const initialState={
     name:'',
@@ -29,6 +30,13 @@ export const userReducer = (state=initialState,action)=>{
                 age:action.age,
                 salary: action.salary
             }
+        case RESET_USER:
+            return {
+                ...state,
+                name:'',
+                age:'',
+                salary:''
+            }
         default:
             return state;
     }
@@ -47,6 +55,12 @@ export function getUsers(id){
                 })
         }
         )
+    }
+}
+
+export function resetUser(){
+    return{
+        type:RESET_USER
     }
 }
 

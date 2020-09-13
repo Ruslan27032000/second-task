@@ -5,6 +5,7 @@ import Router from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {deleteEmployee, getEmployees} from "../../redux/employeesReducer";
+import {resetUser} from "../../redux/userReducer";
 
 
 export default function Employee() {
@@ -15,6 +16,7 @@ export default function Employee() {
         if(data.length==0){
             dispatch(getEmployees());
         }
+        dispatch(resetUser())
     }, [])
 
 
