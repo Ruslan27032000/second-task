@@ -13,7 +13,7 @@ export default function Employee() {
     const dispatch = useDispatch()
     const data = useSelector(state => state.employee.employees)
     useEffect(() => {
-        if(data.length==0){
+        if (data.length == 0) {
             dispatch(getEmployees());
         }
         dispatch(resetUser())
@@ -23,7 +23,9 @@ export default function Employee() {
     return (
         <RootLayout>
             <div className="row mt-5">
-                <button type="button" className="btn btn-success" onClick={()=>Router.push('/employee/create')}>Добавить</button>
+                <button type="button" className="btn btn-success"
+                        onClick={() => Router.push('/employee/create')}>Добавить
+                </button>
                 <div className="col-sm-12">
                     <table className="table">
                         <thead>
@@ -60,11 +62,13 @@ export default function Employee() {
     )
 }
 
-Employee.getInitialProps = async ({store,req}) =>{
-    if(!req){
-        return {employees:null}
+Employee.getInitialProps = async ({store, req}) => {
+    if (!store.employees) {
+        if (!req) {
+            return {employees: null}
+        }
+        await store.dispatch(getEmployees());
+        await store.dispatch(resetUser())
+        return {}
     }
-    await store.dispatch(getEmployees());
-    await store.dispatch(resetUser())
-    return {}
 }
