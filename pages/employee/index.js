@@ -59,3 +59,12 @@ export default function Employee() {
         </RootLayout>
     )
 }
+
+Employee.getInitialProps = async ({store,req}) =>{
+    if(!req){
+        return {employees:null}
+    }
+    await store.dispatch(getEmployees());
+    await store.dispatch(resetUser())
+    return {}
+}
