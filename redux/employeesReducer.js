@@ -4,6 +4,8 @@ import Router from "next/router";
 const ADD_EMPLOYEE = 'ADD_EMPLOYEE'
 const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE'
 const GET_EMPLOYEES = 'GET_EMPLOYEES'
+const REEDIT_EMPLOYEES = 'REEDIT_EMPLOYEES'
+
 
 const initialState = {
     employees: []
@@ -25,6 +27,12 @@ export const EmployeesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 employees: action.data
+            }
+        }
+        case REEDIT_EMPLOYEES:{
+            return{
+                ...state,
+                employees:action.data
             }
         }
         default:
@@ -96,4 +104,11 @@ export function addEmployee(name, age, salary) {
             }
         })
     }
+}
+
+export function reEditEmployee(newArr){
+        return{
+            type:REEDIT_EMPLOYEES,
+            data:newArr
+        }
 }

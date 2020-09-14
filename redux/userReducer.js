@@ -1,5 +1,6 @@
 import * as axios from "axios";
 import Router from "next/router";
+import {reEditEmployee} from "./employeesReducer";
 
 const GET_USER='GET_USER'
 const EDIT_USER = 'EDIT_USER'
@@ -65,7 +66,7 @@ export function resetUser(){
 }
 
 export function editUser(id,name,salary,age){
-    return dispatch=>{
+    return (dispatch,getState)=>{
         axios({
             method:'put',
             headers:{ 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -77,6 +78,18 @@ export function editUser(id,name,salary,age){
             }
         }).then(response =>{
             /*Не знаю, стоит ли менять старый айдишник на новый*/
+            let state = getState();
+            let arr = state.employee.employees;
+            for(let i in arr){
+                if(arr[i].id==id){
+                    arr[i]={
+                        id:id,
+                        employee_name:name,
+                        employee_salary:salary,
+                        employee_age:age
+                    }
+                }
+            }
            if(response.data.status == "success"){
                dispatch({
                    type:EDIT_USER,
@@ -84,6 +97,7 @@ export function editUser(id,name,salary,age){
                    salary,
                    age
                })
+               dispatch(reEditEmployee(arr))
                Router.push(`/employee/${id}`);
            }
         })
